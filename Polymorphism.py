@@ -127,3 +127,101 @@
         
         main()
 
+#Vehicle Servicing
+
+    # Implement the Vehicle, Car and Motorcycle classes appropriately
+    
+    class Vehicle:
+        def __init__(self,tire_wear_limit,oil_change_limit,brake_service_limit):
+            self.tire_wear_limit = tire_wear_limit
+            self.oil_change_limit = oil_change_limit
+            self.brake_service_limit = brake_service_limit
+            
+        def check_tire_wear(self):
+            pass
+        
+        def check_oil_level(self):
+            pass
+        
+        def check_brake_condition(self):
+            pass
+    
+    class Car(Vehicle):
+        def __init__(self, tire_wear_limit, oil_change_limit, brake_service_limit):
+            super().__init__(tire_wear_limit, oil_change_limit, brake_service_limit)
+        
+        def check_tire_wear(self,car_tire_wear):
+            if (car_tire_wear >= self.tire_wear_limit):
+                return "Car tires need replacement"
+            elif (car_tire_wear < self.tire_wear_limit):
+                return " Car tires are in good condition"
+                
+        
+        def check_oil_level(self,car_oil_level):
+            if (car_oil_level < self.oil_change_limit):
+                return "Car needs an oil change"
+            elif(car_oil_level >= self.oil_change_limit):
+                return "Car oil level is fine"
+        
+        def check_brake_condition(self,car_brake_condition):
+            if (car_brake_condition < self.brake_service_limit):
+                return "Car brakes require servicing"
+            elif(car_brake_condition >= self.brake_service_limit):
+                return "Car brakes are in good working condition"
+            
+            
+            
+    
+    class Motorcycle(Vehicle):
+        def __init__(self, tire_wear_limit, oil_change_limit, brake_service_limit):
+            super().__init__(tire_wear_limit, oil_change_limit, brake_service_limit)
+    
+        
+        def check_tire_wear(self,motorcycle_tire_wear):
+            if(motorcycle_tire_wear >= self.tire_wear_limit):
+                return "Motorcycle tires need replacement"
+            elif(motorcycle_tire_wear < self.tire_wear_limit):
+                return "Motorcycle tires are in good condition"
+        
+        def check_oil_level(self,motorcycle_oil_level):
+            if(motorcycle_oil_level < self.oil_change_limit):
+                return "Motorcycle needs an oil change"
+            elif(motorcycle_oil_level >= self.oil_change_limit):
+                return "Motorcycle oil level is fine"
+        
+        def check_brake_condition(self,motorcycle_brake_condition):
+            if(motorcycle_brake_condition < self.brake_service_limit):
+                return "Motorcycle brakes require servicing"
+            elif(motorcycle_brake_condition >= self.brake_service_limit):
+                return "Motorcycle brakes are in good working condition"
+    # Do not change any code below.
+    # Do not call this function anywhere.
+    
+    def main():
+        car_tire_wear_limit = int(input())
+        car_oil_change_limit = int(input())
+        car_brake_service_limit = int(input())
+        
+        motorcycle_tire_wear_limit = int(input())
+        motorcycle_oil_change_limit = int(input())
+        motorcycle_brake_service_limit = int(input())
+        
+        car = Car(car_tire_wear_limit,car_oil_change_limit,car_brake_service_limit)
+        motorcycle = Motorcycle(motorcycle_tire_wear_limit,motorcycle_oil_change_limit,motorcycle_brake_service_limit)
+        
+        car_tire_wear = int(input())
+        car_oil_level = int(input())
+        car_brake_condition= int(input())
+        
+        motorcycle_tire_wear = int(input())
+        motorcycle_oil_level = int(input())
+        motorcycle_brake_condition = int(input())
+        
+        print(car.check_tire_wear(car_tire_wear))
+        print(car.check_oil_level(car_oil_level))
+        print(car.check_brake_condition(car_brake_condition))
+        print(motorcycle.check_tire_wear(motorcycle_tire_wear))
+        print(motorcycle.check_oil_level(motorcycle_oil_level))
+        print(motorcycle.check_brake_condition(motorcycle_brake_condition))
+        
+    main()
