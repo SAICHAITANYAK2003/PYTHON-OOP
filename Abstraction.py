@@ -134,5 +134,122 @@
       
       main()
 
-#
+#Appliance:
+
+                # Implement the Appliance, WashingMachine and Refrigerator classes appropriately
+                from abc import ABC,abstractmethod
+                
+                
+                class Appliance(ABC):
+                    
+                    @abstractmethod
+                    def switch_on(self):
+                        pass
+                    
+                    @abstractmethod
+                    def switch_off(self):
+                        pass
+                
+                class WashingMachine(Appliance):
+                    def __init__(self, load_capacity):
+                        self.load_capacity = load_capacity
+                        self.current_load = 0
+                        self.is_operating = False
+                        
+                    def switch_on(self):
+                        if(self.is_operating) :
+                            return "Washing Machine is already switched on"
+                        elif(self.current_load ==0):
+                                return "Add clothes to start the machine"
+                        else:
+                                self.is_operating = True
+                            
+                            
+                    
+                    def switch_off(self):
+                        if(self.is_operating):
+                            self.is_operating = False
+                        else:
+                            return "Washing Machine is already switched off"
+                    
+                    def add_clothes(self,num_clothes):
+                        if(num_clothes > self.load_capacity):
+                            return "Exceeds load capacity"
+                        
+                        if( num_clothes > 0):
+                            self.current_load = num_clothes
+                        
+                        if(num_clothes <= 0):
+                            return "Cannot add zero or negative number of clothes"
+                    
+                    def remove_clothes(self):
+                        if(self.current_load > 0):
+                            self.current_load = 0
+                        else:
+                            return "No clothes to remove"
+                
+                class Refrigerator:
+                    def __init__(self, temperature):
+                        self.temperature = temperature
+                        self.is_operating = False
+                        
+                    def switch_on(self):
+                        if(self.is_operating):
+                            return "Refrigerator is already switched on"
+                            
+                        else:
+                            self.is_operating = True
+                            
+                    
+                    def switch_off(self):
+                        if(self.is_operating):
+                            self.is_operating = False
+                        else:
+                            return "Refrigerator is already switched off"
+                    
+                    def adjust_temperature(self,new_temperature):
+                        self.temperature = new_temperature
+                
+                # Do not change any code below.
+                # Do not call this function anywhere.
+                
+                def main():
+                    list = input()
+                    input_list = list.split(",")
+                
+                    load_capacity = int(input())
+                    initial_temperature = int(input())
+                        
+                    washing_machine = WashingMachine(load_capacity)
+                    refrigerator = Refrigerator(initial_temperature)
+                
+                    wm_operations = {
+                        'add_clothes': lambda num_clothes: print(washing_machine.add_clothes(num_clothes)) if washing_machine.add_clothes(num_clothes) is not None else None,
+                        'switch_on': lambda: print(washing_machine.switch_on()) if washing_machine.switch_on() is not None else None,
+                        'switch_off': lambda: print(washing_machine.switch_off()) if washing_machine.switch_off() is not None else None,
+                        'remove_clothes': lambda: print(washing_machine.remove_clothes()) if washing_machine.remove_clothes() is not None else None
+                    }
+                
+                    fridge_operations = {
+                        'adjust_temperature': lambda: print(refrigerator.adjust_temperature(new_temperature)) if refrigerator.adjust_temperature(new_temperature) is not None else None,
+                        'switch_on': lambda: print(refrigerator.switch_on()) if refrigerator.switch_on() is not None else None,
+                        'switch_off': lambda: print(refrigerator.switch_off()) if refrigerator.switch_off() is not None else None
+                    }
+                
+                    for operation in input_list[:4]:
+                        if 'add_clothes' in operation:
+                            _, num_clothes = operation.split()
+                            wm_operations['add_clothes'](int(num_clothes))
+                        elif operation in wm_operations:
+                            wm_operations[operation]()
+                    for operation in input_list[5:]:
+                        if 'adjust_temperature' in operation:
+                            _, new_temperature = operation.split()
+                            fridge_operations['adjust_temperature'](int(new_temperature))
+                        elif operation in wm_operations:
+                            fridge_operations[operation]()
+                
+                
+                main()
+
 
